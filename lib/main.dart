@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
 import 'bird.dart';
 
 void main() {
@@ -17,11 +17,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+
+
+  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -54,7 +60,7 @@ setState(() {
         timer.cancel();
       }
     });
-  }// this function responsable to make the bird jump according to low attraction ahm mo3adlten  2
+  }// this function responsable to make the bird jump according to low attraction ahm mo3adlten 2
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +68,7 @@ setState(() {
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Expanded(
-          flex: 3,
+          flex: 2,
           child: GestureDetector(
             onTap: (){
               if(gameStarted){
@@ -83,9 +89,41 @@ setState(() {
                         image: AssetImage("assets/images/day.png")))),
           ),
         ),
+        Container(
+          height: 10,
+          color: Colors.green[800],
+        ),
         Expanded(
             child: Container(
-          color: Colors.green[300],
+          color: Colors.brown[700],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("SCORE",style: TextStyle(color: Colors.white,fontSize: 20),),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("0",style: TextStyle(color: Colors.white,fontSize: 40),)
+                    ],
+
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Best",style: TextStyle(color: Colors.white,fontSize: 20),),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("0",style: TextStyle(color: Colors.white,fontSize: 40),)
+                    ],
+
+                  )
+                ],
+
+              ),
         )),
       ]),
     );
