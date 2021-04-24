@@ -40,7 +40,7 @@ setState(() {
   intheight=birdPos;
 });
 
-  } // de 34an kol mara ados y jump w el timer yfdl wa7ed le2n lw kont 3amltha b nafs el taimer kan kol mara ha y create timer gded
+  } // de 34an kol mara ados y jump w el timer yfdl wa7ed le2n lw kont 3amltha b nafs el taimer kan kol mara ha y create timer gded 1
   void startGame(){
     gameStarted=true;
     Timer.periodic(Duration(milliseconds: 60), (timer) {
@@ -54,7 +54,7 @@ setState(() {
         timer.cancel();
       }
     });
-  }// this function responsable to make the bird jump according to low attraction
+  }// this function responsable to make the bird jump according to low attraction ahm mo3adlten  2
 
   @override
   Widget build(BuildContext context) {
