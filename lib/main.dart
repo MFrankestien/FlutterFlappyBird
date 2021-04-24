@@ -69,25 +69,32 @@ setState(() {
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Expanded(
           flex: 2,
-          child: GestureDetector(
-            onTap: (){
-              if(gameStarted){
-                jump();
-              }
-              else{
-                startGame();
-              }
-            },
-            child: Container(
-              child: AnimatedContainer(
-                  alignment: Alignment(0,birdPos),
-                  duration: Duration(milliseconds: 0),//0 to make the bird in the mid and birdPos is variable to make the bird go up and down
-                  child: MyBird()),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                        image: AssetImage("assets/images/day.png")))),
-          ),
+          child: Stack(
+            children: [
+              GestureDetector(
+                onTap: (){
+                  if(gameStarted){
+                    jump();
+                  }
+                  else{
+                    startGame();
+                  }
+                },
+                child: Container(
+                    child: AnimatedContainer(
+                        alignment: Alignment(0,birdPos),
+                        duration: Duration(milliseconds: 0),//0 to make the bird in the mid and birdPos is variable to make the bird go up and down
+                        child: MyBird()),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage("assets/images/day.png")))),
+              ),
+              Container(
+                child:Text("0")
+              )
+            ],
+          )
         ),
         Container(
           height: 10,
