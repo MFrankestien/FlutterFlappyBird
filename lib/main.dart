@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flappybird_game/barriers.dart';
 import 'package:flutter/material.dart';
 import 'bird.dart';
 
@@ -25,8 +26,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-
-
   final String title;
 
   @override
@@ -34,68 +33,100 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static double birdPos= 0;
-  double time=0;
-  double height=0;
-  double intheight=birdPos;
-  bool gameStarted=false; // hay4of hal el le3ba e4ta8alet aslan wla la2 3a4an y7sb el hieght w el time
+  static double birdPos = 0;
+  double time = 0;
+  double height = 0;
+  double intheight = birdPos;
+  bool gameStarted = false; // hay4of hal el le3ba e4ta8alet aslan wla la2 3a4an y7sb el hieght w el time
+  static double barrierXOne = 1;
+  double barrierXTwo = barrierXOne + 1.5;
 
   void jump() {
-setState(() {
-  time=0;
-  intheight=birdPos;
-});
-
+    setState(() {
+      time = 0;
+      intheight = birdPos;
+    });
   } // de 34an kol mara ados y jump w el timer yfdl wa7ed le2n lw kont 3amltha b nafs el taimer kan kol mara ha y create timer gded 1
-  void startGame(){
-    gameStarted=true;
+
+  void startGame() {
+    gameStarted = true;
     Timer.periodic(Duration(milliseconds: 60), (timer) {
       time += 0.04; // for every frame
-      height= -4.9 * time * time + 2.8 * time ;
+      height = -4.9 * time * time + 2.8 * time;
       setState(() {
-        birdPos= intheight - height;
+        birdPos = intheight - height;
       });
-      if(birdPos > 1){
-        gameStarted=false;
+      if (birdPos > 1) {
+        gameStarted = false;
         timer.cancel();
       }
     });
-  }// this function responsable to make the bird jump according to low attraction ahm mo3adlten 2
+  } // this function responsable to make the bird jump according to low attraction ahm mo3adlten 2
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Expanded(
-          flex: 2,
-          child: Stack(
-            children: [
-              GestureDetector(
-                onTap: (){
-                  if(gameStarted){
-                    jump();
-                  }
-                  else{
-                    startGame();
-                  }
-                },
-                child: Container(
-                    child: AnimatedContainer(
-                        alignment: Alignment(0,birdPos),
-                        duration: Duration(milliseconds: 0),//0 to make the bird in the mid and birdPos is variable to make the bird go up and down
-                        child: MyBird()),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/images/day.png")))),
-              ),
-              Container(
-                child:Text("0")
-              )
-            ],
-          )
+            flex: 2,
+            child: Stack(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (gameStarted) {
+                      jump();
+                    } else {
+                      startGame();
+                    }
+                  },
+                  child: Container(
+                      child: AnimatedContainer(
+                          alignment: Alignment(0, birdPos),
+                          duration: Duration(
+                              milliseconds:
+                                  0), //0 to make the bird in the mid and birdPos is variable to make the bird go up and down
+                          child: MyBird()),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage("assets/images/day.png")))),
+                ),
+                Container(child: Text("0")),
+        AnimatedContainer(
+          alignment: Alignment(barrierXOne, 1.4),
+          duration: Duration(milliseconds: 0),
+          child: MyBarrier(
+            position: "bot",
+            size: 150.0,
+          ),
         ),
+        AnimatedContainer(
+          alignment: Alignment(barrierXOne, -1.4),
+          duration: Duration(milliseconds: 0),
+          child: MyBarrier(
+            position: "top",
+            size: 150.0,
+          ),
+        ),
+        AnimatedContainer(
+          alignment: Alignment(barrierXTwo, 1.2),
+          duration: Duration(milliseconds: 0),
+          child: MyBarrier(
+            size: 100.0,
+            position: "bot",
+          ),
+        ),
+        AnimatedContainer(
+          alignment: Alignment(barrierXTwo, -1.2),
+          duration: Duration(milliseconds: 0),
+          child: MyBarrier(
+
+
+            size: 220.0,
+          ),
+        )],
+            )),
+
         Container(
           height: 10,
           color: Colors.green[800],
@@ -103,34 +134,43 @@ setState(() {
         Expanded(
             child: Container(
           color: Colors.brown[700],
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("SCORE",style: TextStyle(color: Colors.white,fontSize: 20),),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("0",style: TextStyle(color: Colors.white,fontSize: 40),)
-                    ],
-
+                  Text(
+                    "SCORE",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Best",style: TextStyle(color: Colors.white,fontSize: 20),),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("0",style: TextStyle(color: Colors.white,fontSize: 40),)
-                    ],
-
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "0",
+                    style: TextStyle(color: Colors.white, fontSize: 40),
                   )
                 ],
-
               ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Best",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "0",
+                    style: TextStyle(color: Colors.white, fontSize: 40),
+                  )
+                ],
+              )
+            ],
+          ),
         )),
       ]),
     );
