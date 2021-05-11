@@ -53,57 +53,59 @@ bool isDark= true;
               horizontal: 15.0,
               vertical: 5,
             ),
-            child: Stack(
-              children: [Column(
-                children: [
-                  Spacer(),
-                  Spacer(),
-                  Image.asset(
-                    'assets/images/bird.png',
-                    width: deviceWidth / 2,
-                  ),
-                  Image(image:AssetImage('assets/images/name.bng.png'),width: deviceWidth /2,),
-                  Spacer(),
-                  Container(
-                    child: DayNightSwitch(
-                      height: deviceHeight /4,
-                      width: deviceWidth/4,
-                      onSelection: (isCheck){
-                        setState(() {
-                          isDark = isCheck;
-                         setTheme();
-                          print(isDark);
-                          print(isCheck);
-                        });
+            child: SingleChildScrollView(
+              child: Stack(
+                children: [Column(
+                  children: [
+                    Spacer(),
+                    Spacer(),
+                    Image.asset(
+                      'assets/images/bird.png',
+                      width: deviceWidth / 2,
+                    ),
+                    Image(image:AssetImage('assets/images/name.bng.png'),width: deviceWidth /2,),
+                    Spacer(),
+                    Container(
+                      child: DayNightSwitch(
+                        height: deviceHeight /4,
+                        width: deviceWidth/4,
+                        onSelection: (isCheck){
+                          setState(() {
+                            isDark = isCheck;
+                           setTheme();
+                            print(isDark);
+                            print(isCheck);
+                          });
 
+                        },
+                      ),
+                    ),
+
+                    MenuButton(
+                      width: deviceWidth,
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      text: 'Start Game',
+                      onPress: () {
+                        Navigator.of(context).pushNamed(HomePage.ROUTE_NAME);
                       },
                     ),
-                  ),
-
-                  MenuButton(
-                    width: deviceWidth,
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    text: 'Start Game',
-                    onPress: () {
-                      Navigator.of(context).pushNamed(HomePage.ROUTE_NAME);
-                    },
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  MenuButton(
-                    width: deviceWidth,
-                    color: Colors.red[900],
-                    textColor: Colors.white,
-                    text: 'Quit',
-                    onPress: () {
-                      SystemNavigator.pop();
-                    },
-                  ),
-                  Spacer(),
-                ],
-              ),],
+                    SizedBox(
+                      height: 16,
+                    ),
+                    MenuButton(
+                      width: deviceWidth,
+                      color: Colors.red[900],
+                      textColor: Colors.white,
+                      text: 'Quit',
+                      onPress: () {
+                        SystemNavigator.pop();
+                      },
+                    ),
+                    Spacer(),
+                  ],
+                ),],
+              ),
             )
         ),
       ),
