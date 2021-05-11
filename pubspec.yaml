@@ -31,6 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.5
   cool_alert: ^1.0.3
+  rive: ^0.0.1
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/Animation_button.flr
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
