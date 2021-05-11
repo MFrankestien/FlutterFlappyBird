@@ -11,7 +11,9 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> { static const String HIGH_SCORE_KEY = 'highScore';
+class _HomePageState extends State<HomePage> {
+  static const String HIGH_SCORE_KEY = 'highScore';
+  static const String Theme_KEY = 'theme';
 static double birdYAxis = 0;
 double time = 0;
 double height = 0;
@@ -30,6 +32,7 @@ int score = 0;
 int highScore = 0;
 
 bool gameStarted = false;
+bool isDark=true;
 
 Timer scoreTimer;
 
@@ -51,11 +54,17 @@ Future<void> getHighScore() async {
     highScore = prefs.getInt(HIGH_SCORE_KEY) ?? 0;
   });
 }
-
+  Future<void> getTheme() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isDark = prefs.getBool(Theme_KEY) ?? 0;
+    });
+  }
 @override
 void initState() {
   super.initState();
   getHighScore();
+   getTheme();
   setInitialValues();
 }
 
@@ -200,8 +209,10 @@ Widget build(BuildContext context) {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage(
+                image: isDark? AssetImage(
                   'assets/images/day.png',
+                ): AssetImage(
+                  'assets/images/night.PNG',
                 ),
               ),
             ),

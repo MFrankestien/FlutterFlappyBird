@@ -77,6 +77,7 @@ class DayNightAnimationController extends FlareControls{
   @override
   void initialize(FlutterActorArtboard artboard) {
     super.initialize(artboard);
+
     play(AnimationStates.night_idle.getName());
   }
   void changeAnimationState(AnimationStates states){
