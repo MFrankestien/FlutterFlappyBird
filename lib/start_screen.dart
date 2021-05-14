@@ -30,11 +30,11 @@ class _StartScreenState extends State<StartScreen> {
   }
   String volu='volume_down';
   Icon volume =Icon(Icons.volume_down,
-    color: Colors.amber,
-    size: 40.0,);
+    color: Colors.blue,
+    size: 50.0,);
   Icon volumeclosed =Icon(Icons.volume_off,
-    color: Colors.amber,
-    size: 36.0,);
+    color: Colors.blue,
+    size: 50.0,);
   bool on=true;
 bool isDark= true;
 
@@ -51,7 +51,7 @@ bool isDark= true;
         width: deviceWidth ,
         decoration: BoxDecoration(
           image: DecorationImage(
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             image:isDark? AssetImage(
               'assets/images/day.png',
             ): AssetImage(
@@ -68,7 +68,7 @@ bool isDark= true;
               children: [Column(
                 children: [
                   Align(
-                    alignment: Alignment.topRight,
+                    alignment: Alignment.topLeft,
                     child: on? IconButton(icon: volume , onPressed:() =>{
                       print('off'),
                     setState(() {
@@ -77,7 +77,7 @@ bool isDark= true;
                     }),
 
                     }) : IconButton(icon: volumeclosed , onPressed:() =>{
-                      print('off'),
+                      print('on'),
                       setState(() {
                         on=true;
                         audio.play('audio/Gaming.mp3');
