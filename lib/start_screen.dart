@@ -28,6 +28,14 @@ class _StartScreenState extends State<StartScreen> {
       isDark = prefs.getBool(Theme_KEY) ?? 0;
     });
   }
+  String volu='volume_down';
+  Icon volume =Icon(Icons.volume_down,
+    color: Colors.amber,
+    size: 40.0,);
+  Icon volumeclosed =Icon(Icons.volume_off,
+    color: Colors.amber,
+    size: 36.0,);
+  bool on=true;
 bool isDark= true;
 
 
@@ -59,17 +67,39 @@ bool isDark= true;
             child: Stack(
               children: [Column(
                 children: [
-                  Spacer(),
-                  Spacer(),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: on? IconButton(icon: volume , onPressed:() =>{
+                      print('off'),
+                    setState(() {
+                      on=false;
+                      audio.pause();
+                    }),
+
+                    }) : IconButton(icon: volumeclosed , onPressed:() =>{
+                      print('off'),
+                      setState(() {
+                        on=true;
+                        audio.play('audio/Gaming.mp3');
+
+                      }),
+
+                    }
+                      ),
+                  ),
+
+                  SizedBox(
+                    height: deviceHeight/8,
+                  ),
                   Image.asset(
                     'assets/images/bird.png',
                     width: deviceWidth / 2,
                   ),
                   Image(image:AssetImage('assets/images/name.bng.png'),width: deviceWidth /2,),
-                  Spacer(),
+
                   Container(
                     child: DayNightSwitch(
-                      height: deviceHeight /4,
+                      height: 70,
                       width: deviceWidth/4,
                       onSelection: (isCheck){
                         setState(() {
@@ -84,7 +114,7 @@ bool isDark= true;
                   ),
 
                   MenuButton(
-                    width: deviceWidth/2,
+                    width: deviceWidth,
                     color: Colors.blue,
                     textColor: Colors.white,
                     text: 'Start Game',
@@ -96,7 +126,7 @@ bool isDark= true;
                     height: 16,
                   ),
                   MenuButton(
-                    width: deviceWidth/2,
+                    width: deviceWidth,
                     color: Colors.red[900],
                     textColor: Colors.white,
                     text: 'Quit',
