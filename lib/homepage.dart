@@ -124,8 +124,8 @@ void startGame() async {
       }
     },
   );
-  Timer.periodic(Duration(milliseconds: 50), (timer) async {
-    time += 0.05;
+  Timer.periodic(Duration(milliseconds: 45), (timer) async {
+    time += 0.04;
     height = -4.9 * time * time + 2.0 * time;
     setState(() {
       birdYAxis = initialHeight - height;
@@ -208,7 +208,7 @@ Widget build(BuildContext context) {
             child: MyBird(),
             decoration: BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 image: isDark? AssetImage(
                   'assets/images/day.png',
                 ): AssetImage(
