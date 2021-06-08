@@ -2,6 +2,9 @@
 
 flappybird Game using Flutter 
 
+for Web version 
+https://flappy-b5a93.web.app/#/
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
